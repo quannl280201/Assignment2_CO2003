@@ -290,9 +290,8 @@ Elem* AVL::searchRec(Node* node, const int &addr){
 Elem* AVL::search(const int &addr){ 
     return this->searchRec(this->root, addr);
 }
-void AVL::clear(){
 
-}
+
 
 
 
@@ -319,6 +318,29 @@ Elem* Cache::put(int addr, Data* cont) {
     return NULL;
 }
 Elem* Cache::write(int addr, Data* cont) {
+    Elem* tmp = this->avlTree.search(addr);
+    if(tmp){
+        tmp->data = cont;
+        tmp->sync = false;
+    }
+    else{
+        if(this->avlTree.getSize() < this->maxSize){
+            this->avlTree.insert(addr, cont);
+            Elem* elemIn = this->avlTree.search(addr);
+            elemIn->sync = false;
+            this->arrLifetime.push(elemIn);
+        }
+        else {
+            Elem* elemOut= this->arrLifetime.front();
+            this->arrLifetime.pop();
+            this->avlTree.remove(elemOut->addr);
+            this->avlTree.insert(addr, cont);
+            Elem* elemIn = this->avlTree.search(addr);
+            elemIn->sync = false;
+            this->arrLifetime.push(elemIn);
+            return elemOut;
+        }
+    }
     return NULL;
 }
 void Cache::print() {
@@ -333,6 +355,7 @@ void Cache::print() {
     }
     for(i = 0; i < queueSize; i++)
         this->arrLifetime.push(tmpArr[i]);
+    delete[] tmpArr;
 }
 void Cache::preOrder() {
 	this->avlTree.preOrder();

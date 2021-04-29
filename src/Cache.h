@@ -22,6 +22,9 @@ public:
 		left = right = NULL;
 		balance = EH;
 	}
+    ~Node(){
+        delete element;
+    }
     
 };
 class AVL
@@ -42,7 +45,6 @@ protected:
     Node *removeRec(Node *&node, const int &addr, bool &shorter, bool &success);
     void inOrderRec(Node* node);
     void preOrderRec(Node* node);
-    void destroyTree(Node* node);
     Elem* searchRec(Node* node, const int &addr);
 public:
 	AVL()
@@ -60,7 +62,6 @@ public:
         return this->size;
     }
     Elem* search(const int &addr);
-    void clear();
 };
 
 
@@ -73,7 +74,7 @@ class Cache {
 			this->maxSize = s;
 		}
 		~Cache() {
-			this->avlTree.clear();
+
 		}
 		Data* read(int addr);
 		Elem* put(int addr, Data* cont);
