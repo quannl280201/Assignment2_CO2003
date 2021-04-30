@@ -1,0 +1,50 @@
+2
+Print queue
+10 3 true
+2 5 true
+9 4 true
+3 7 true
+8 4 false
+20 4 true
+4 4 true
+5 999 true
+11 11 false
+12 12 false
+13 13 false
+14 14 false
+15 15 false
+16 16 false
+17 17 false
+5
+Print AVL in preorder
+9 4 true
+3 7 true
+2 5 true
+1 10 true
+5 999 true
+4 4 true
+8 4 false
+13 13 false
+11 11 false
+12 12 false
+15 15 false
+14 14 false
+17 17 false
+16 16 false
+20 4 true
+Print AVL in inorder
+1 10 true
+2 5 true
+3 7 true
+4 4 true
+5 999 true
+8 4 false
+9 4 true
+11 11 false
+12 12 false
+13 13 false
+14 14 false
+15 15 false
+16 16 false
+17 17 false
+20 4 true

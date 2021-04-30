@@ -22,9 +22,6 @@ public:
 		left = right = NULL;
 		balance = EH;
 	}
-    ~Node(){
-        delete element;
-    }
     
 };
 class AVL
@@ -74,7 +71,11 @@ class Cache {
 			this->maxSize = s;
 		}
 		~Cache() {
-
+            while(!(this->arrLifetime.empty())){
+                Elem* elemOut= this->arrLifetime.front();
+                this->arrLifetime.pop();
+                this->avlTree.remove(elemOut->addr);
+            }
 		}
 		Data* read(int addr);
 		Elem* put(int addr, Data* cont);
